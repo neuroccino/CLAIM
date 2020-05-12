@@ -2,12 +2,12 @@ library(shiny)
 
 ncheck <- 47 # Number of checklist items CHANGE to 47
 checkIDs <- c("1", "2","3","4",
-              "5", "6", "7a.datasources", "7b.dataav", "7c.codeav", "8", "9", "10","11", "12", "13", "14", 
+              "5", "6", "7a.Data_Sources", "7b.Data_Available", "7c.Code_Available", "8", "9", "10","11", "12", "13", "14", 
               "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", 
               "25","26", "27", "28", "29", "30", "31", "32", 
-              "33", "34", "35a.performance", "35b.benchmark", "36","37",
-              "38a.summary", "38b.limitations", "39",  
-              "40a.datareg", "40b.analysisreg", "41", "42"
+              "33", "34", "35a.Performance", "35b.Benchmark", "36","37",
+              "38a.Summary", "38b.Limitations", "39",  
+              "40a.Datacollection_Registered", "40b.Analysis_Registered", "41", "42"
 )
 
 # Vectors of checklist IDs
@@ -21,9 +21,9 @@ responseIDs <- paste0("response", checkIDs)
 # Vector of indeces for pre-existing choices in "choicelist" - 47 items
 choiceindex <- c(6,6,1,3, # items 1-4
                 4,1,1,1,1,5,1,2,2,2,2,2, # METHODS: checklist items 5-14, including new subcategory 7a-c repository to data/code
-                2,2,2,2,2,2,2,2,1,2, # items 15-24, including 
+                2,2,2,2,1,2,2,1,1,1, # items 15-24, including 
                 2,2,2,1,1,1,2,1, # items 25-32 
-                5,5,2,2,2,2, # RESULTS: checklist items 33-37, including new subcategory 35a-b model performance/benchmark
+                5,5,1,1,2,2, # RESULTS: checklist items 33-37, including new subcategory 35a-b model performance/benchmark
                 5,5,1,  # DISCUSSION: checklist items 38 and 39, including new subcategory 38a-b summary/limitations
                 1,1,2,1 # OTHER INFOCMATION: checklist items 40-42, including new subcategory 40a-b registration of data generating process/ML study
 )
@@ -33,7 +33,7 @@ choiceindex <- c(6,6,1,3, # items 1-4
 choicelist <- list(c("No", "Yes"),
                    c("No", "Yes", "Not applicable"),
                    c("Objectives: No; Hypotheses: No", "Objectives: No; Hypotheses: Yes", "Objectives: Yes; Hypotheses: No", "Objectives: Yes; Hypotheses: Yes"),
-                   c("Retrospective", "Prospective"),
+                   c("Please Select","Retrospective", "Prospective"),
                    c("No", "Partially", "Yes"), 
                    c("no", "yes") # used for items where open text is not needed. 
 )
@@ -91,59 +91,59 @@ labels <- c("1) Identification as a study of AI methodology, specifying the cate
             "41) Where the full study protocol can be accessed.", 
             "42) Sources of funding and other support; role of funders."
 )
-placeholders <- list("1) Copy here relevant text from manuscript.",
-                     "2) Copy here relevant text from manuscript. ",
-                     "3) Copy here relevant text from manuscript.",
-                     "4) Copy here relevant text from manuscript.",
-                     "5) Copy here relevant text from manuscript.",
-                     "6) Copy here relevant text from manuscript.",
+placeholders <- list("1) Indicate section where this information is provided in the manuscript. ",
+                     "2) Indicate section where this information is provided in the manuscript.  ",
+                     "3) Indicate section where this information is provided in the manuscript. ",
+                     "4) Indicate section where this information is provided in the manuscript. ",
+                     "5) Indicate section where this information is provided in the manuscript. ",
+                     "6) Indicate section where this information is provided in the manuscript. ",
                      "7a) Copy here the text from your manuscript that states the source of data and indicate how well the data match the intended use of the model and that describes the targeted application of the predictive model to allow readers to interpret the implications of reported accuracy estimates.",
                      "7b) Copy here the text from your manuscript that provides links to data repository, if available.",
                      "7c) Copy here the text from your manuscript that provides links to software/code repository, if available.",
-                     "8) Copy here relevant text from manuscript.",
-                     "9) Copy here relevant text from manuscript.",
-                     "10) Copy here relevant text from manuscript.",
-                     "11) Copy here relevant text from manuscript.",
-                     "12) Copy here relevant text from manuscript.",
-                     "13) Copy here relevant text from manuscript.",
-                     "14) Copy here relevant text from manuscript.",
-                     "15) Copy here relevant text from manuscript.",
-                     "16) Copy here relevant text from manuscript.",
-                     "17) Copy here relevant text from manuscript.",
-                     "18) Copy here relevant text from manuscript.",
-                     "19) Copy here relevant text from manuscript.",
-                     "20) Copy here relevant text from manuscript.",
-                     "21) Copy here relevant text from manuscript.",
-                     "22) Copy here relevant text from manuscript.", 
-                     "23) Copy here relevant text from manuscript.", 
-                     "24) Copy here relevant text from manuscript.", 
-                     "25) Copy here relevant text from manuscript.", 
-                     "26) Copy here relevant text from manuscript.", 
-                     "27) Copy here relevant text from manuscript.", 
-                     "28) Copy here relevant text from manuscript.", 
-                     "29) Copy here relevant text from manuscript.", 
-                     "30) Copy here relevant text from manuscript.",
-                     "31) Copy here relevant text from manuscript.", 
-                     "32) Copy here relevant text from manuscript.", 
-                     "33) Copy here relevant text from manuscript.", 
-                     "34) Copy here relevant text from manuscript.", 
-                     "35a) Copy here relevant text from manuscript.", 
-                     "35b) Copy here relevant text from manuscript.", 
-                     "36) Copy here relevant text from manuscript.", 
-                     "37) Copy here relevant text from manuscript.", 
-                     "38a) Copy here relevant text from manuscript.", 
-                     "38b) Copy here relevant text from manuscript.", 
-                     "39) Copy here relevant text from manuscript.", 
+                     "8) Indicate section where this information is provided in the manuscript. ",
+                     "9) Indicate section where this information is provided in the manuscript. ",
+                     "10)  In  some  studies,  investigators  select  subsets  of  the  raw extracted data as a preprocessing step, for instance, selecting a subset of the images, cropping down to a portion of an image, or extracting a portion of a report. If this process is automated, describe the tools and parameters used; if done manually, specify the training of the personnel and the criteria they used. Justify how this manual step would be accommodated in the context of the clinical or scientific problem to be solved. Indicate section where this information is provided in the manuscript. ",
+                     "11)  Define  the  predictor  and  outcome  variables.  Map  them  to  common  data  elements,  if  applicable,  such  as  those  maintained  by  the  radiology  community  (22-24)  or  the  U.S.  National Institutes of Health (25,26). Indicate section where this information is provided in the manuscript. ",
+                     "12) Indicate section where this information is provided in the manuscript. ",
+                     "13) Indicate section where this information is provided in the manuscript. ",
+                     "14) Indicate section where this information is provided in the manuscript. ",
+                     "15) Indicate section where this information is provided in the manuscript. ",
+                     "16) Indicate section where this information is provided in the manuscript. ",
+                     "17) Indicate section where this information is provided in the manuscript. ",
+                     "18) Indicate section where this information is provided in the manuscript. ",
+                     "19) Indicate section where this information is provided in the manuscript. ",
+                     "20) Indicate section where this information is provided in the manuscript. ",
+                     "21) Indicate section where this information is provided in the manuscript. ",
+                     "22) Indicate section where this information is provided in the manuscript. ", 
+                     "23) Indicate section where this information is provided in the manuscript. ", 
+                     "24) Indicate section where this information is provided in the manuscript. ", 
+                     "25) Indicate section where this information is provided in the manuscript. ", 
+                     "26) Indicate section where this information is provided in the manuscript. ", 
+                     "27) Indicate section where this information is provided in the manuscript. ", 
+                     "28) Indicate section where this information is provided in the manuscript. ", 
+                     "29) Indicate section where this information is provided in the manuscript. ", 
+                     "30) Indicate section where this information is provided in the manuscript. ",
+                     "31) Indicate section where this information is provided in the manuscript. ", 
+                     "32) Indicate section where this information is provided in the manuscript. ", 
+                     "33) Indicate section where this information is provided in the manuscript. ", 
+                     "34) Indicate section where this information is provided in the manuscript. ", 
+                     "35a) Indicate section where this information is provided in the manuscript. ", 
+                     "35b) Indicate section where this information is provided in the manuscript. ", 
+                     "36) Indicate section where this information is provided in the manuscript. ", 
+                     "37) Indicate section where this information is provided in the manuscript. ", 
+                     "38a) Indicate section where this information is provided in the manuscript. ", 
+                     "38b) Indicate section where this information is provided in the manuscript. ", 
+                     "39) Indicate section where this information is provided in the manuscript. ", 
                      "40a) Copy here the registration number and URL where the registration can be accessed.", 
                      "40b) Copy here the registration number and URL where the registration can be accessed.", 
-                     "41) Copy here relevant text from manuscript.", 
-                     "42) Copy here relevant text from manuscript."
+                     "41) Indicate section where this information is provided in the manuscript. ", 
+                     "42) Indicate section where this information is provided in the manuscript. "
 )
 noboilers <- c("AI methodology NOT identifiable.",
                "Structured summaries NOT provided.",
                "Scientific and clinical background NOT provided.",
                "Study objectives and hypotheses not described.",
-               "Study type NOT clear.",
+               "Study type not rated or not clear from manuscript.",
                "Study goal NOT clear.",
                "a. Data sources NOT clear.",
                "7b. Data deposited NOT clear." , 
@@ -153,7 +153,7 @@ noboilers <- c("AI methodology NOT identifiable.",
                "Selection of data subsets NOT described.",
                "Definitions of data elements NOT provided.",
                "De-identification methods NOT described.",
-               "Hanling of missing data NOT described.",
+               "Handling of missing data NOT described.",
                "Definition of ground truth reference standard NOT provided.",
                "Rationale for choosing the reference standard NOT provided.",
                "Source of ground truth annotations NOT provided.", 
@@ -183,22 +183,19 @@ noboilers <- c("AI methodology NOT identifiable.",
                "38b) Study limitations NOT described.", 
                "Implications for (clinical) practice NOT described.", 
                "a) Registration number and name of registry for study that generated raw data NOT reported.", 
-               "40b) Registration number and name of registry for reviewed Machine Learning study NOT reported.", 
+               "41b) Registration number and name of registry for reviewed Machine Learning study NOT reported.", 
                "Access to full study protocol NOT provided.", 
                "Sources of funding and other support and the role of funders NOT disclosed."
 )
-naboilers <- c(NA, NA, 
-               NA, "The experiment did not include a double-blind",
-               "NA: There was only one participant group",
-               "NA: There was only one participant group",
-               "NA: There was only one participant group",
-               "The present study is a clinical efficacy study. There was no standard-of-care intervention group",
-               NA, NA, NA, NA, NA,
-               NA, NA, NA, NA, NA,
-               NA, NA, "NA: There was only one participant group",
-               "NA:  the study does not take cognitive or behavioural measures",
-               "NA:  the study does not take cognitive or behavioural measures",
-               NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA 
+naboilers <- c(NA, NA, NA, NA,
+               NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, "NA: no data subsets were used.", # including item 14, point 16
+               "NA: No prediction model was used.", "NA: Deitenfication of data (e.g. simulated) not applicable.",
+               "NA: No missing data reported.", "NA: No ground truth defined for given problem (e.g. purely exploratory research).", "NA: No reference standard exists.",
+               "NA: No ground truth exists.", "NA: No annotation tools were used/needed for given problem.", "NA for given problem.", NA, "NA: No data parititions used.", 
+               "NA: No data parititions used.", NA, NA, NA, "NA: No training was applied.", "NA: No model selection was performed.", "NA: No ensemble techniques were used.", NA, NA, NA, 
+               "NA: Not defined for used techniques.", NA, 
+               NA, NA, NA, NA, "NA: Diagnostic accuracy not applicable.", NA, 
+               NA, "NA: no study protocol", NA 
 )
 strblank <- "This field has been left blank"
 
@@ -244,20 +241,20 @@ ui <- fluidPage(
         tabPanel("About",
                  tags$div(HTML("<h1><u>C</u>heck<u>l</u>ist for <u>A</u>rtificial <u>I</u>ntelligence in <u>M</u>edical Imaging (CLAIM)</h1>")),
                  tags$div(p("This webpage serves as an online tool to standardize planning and reporting of Machine Learning studies in Medical Imaging. It is based on the", 
-                            a(href="https://pubs.rsna.org/doi/10.1148/ryai.2020200029", "Checklist for Artificial Intelligence in Medical Imaging (CLAIM)"), "published as a an editorial in 'Radiology:Artificial Intelligence' by", 
+                            a(href="https://pubs.rsna.org/doi/10.1148/ryai.2020200029", "Checklist for Artificial Intelligence in Medical Imaging (CLAIM)"), "published as a an editorial in 'Radiology: Artificial Intelligence' by", 
                             a(href="https://profiles.ucsf.edu/john.mongan", "Dr. John Mongan"), "(UCSF)", a(href="https://nyulangone.org/doctors/1922064559/linda-moy", "Dr. Linda Moy"), "(NYU) and", a(href="https://ldi.upenn.edu/expert/charles-e-kahn-jr-md-ms", "Dr. Charles Kahn"), "(UPenn).",
                             "This online tool was inspired by the", a(href="https://crednf.shinyapps.io/CREDnf/", "CRED-nf checklist."),
-                            tags$div(p("BEFORE USING, PLEASE NOTE: This is currently a Beta version that still under development. Please do not share the domain without permission!, 
+                            tags$div(p("BEFORE USING, PLEASE NOTE: This is currently a Beta version. If you encounter any bugs when using it or have any feedback, please email mehlerdma@gmail.com with the subject `CLAIM Shiny App` or raise an issue on", 
+                                       a(href="https://github.com/neuroccino/CLAIM", "GitHub"), ".",
                             
-                                       This digital version of the CLAIM checklist has been created by", a(href="https://twitter.com/neuroccino", "Dr. David Mehler"), "(University of Muenster). 
-                                       The content is taken from the published version of the orinigal manuscript by Mongan et al., 2020 (linked above). The original items 7, 35, 38 and 40 are broken down to more detailed subitems (alphabetically labelled). If you encounter any bugs when using it or have any feedback, please email mehlerdma@gmail.com with the subject `CLAIM Shiny App`. 
-                                       A Github repository page will be created soon where issues can be raised as well.")) , 
+                                       "This digital version of the CLAIM checklist has been created by", a(href="https://twitter.com/neuroccino", "Dr. David Mehler"), "(University of Muenster). 
+                                       The content is taken from the published version of the orinigal manuscript by Mongan et al., 2020 (linked above). The original items 7, 35, 38 and 40 are broken down to more detailed subitems (alphabetically labelled).")) , 
                             
                             "INSTRUCTIONS:", 
                                        
-                            "Please select the tabs on the left and answer the questions provided. When you respond ‘Yes’ to an item, you will be prompted to copy-paste the text from your manuscript that addresses the item. We recommend you also save this copy-pasted text in a text document in case this webpage has a timeout issue.", style = "font-size:15px")),
+                            "Please select the tabs on the left and answer the questions provided. When you respond 'Yes' to an item, you will be prompted to copy-paste the text from your manuscript that identifies the section that addresses the item. We recommend you also save this copy-pasted text in a text document in case this webpage has a timeout issue.", style = "font-size:15px")),
                  br(),
-                 p("To save your results, please copy the summary from ‘Checklist summary’ tab or print it as a PDF. You can include this checklist summary in your manuscript submission as supplementary material or as an additional file when reviewing a manuscript or grant application. A future version of this page will inlcude the option to generate a PDF with a nicely formatted table that can be downloaded. ", style = "font-size:15px"),
+                 p("When completed, click the 'Download summary' button from the 'Checklist summary' tab. This will produce a table which you can include in your manuscript submission as supplementary material.", style = "font-size:15px"),
                  br(),
 
         ),
@@ -409,83 +406,92 @@ ui <- fluidPage(
                              lapply(1, function(i) {
                                  tags$li(textOutput(summaryIDs[i]))
                              }),
-                         h4("Abstract"),
-                           lapply(2, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                         h4("Introduction"),
+                             h4("Abstract"),
+                             lapply(2, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Introduction"),
                              lapply(3:4, function(i) {
                                  tags$li(textOutput(summaryIDs[i]))
                              }),
-                         h4("METHODS (items 5-32)"),
-                         h4("Study Design"),
+                             h4("METHODS (items 5-32)"),
+                             h4("Study Design"),
                              lapply(5:6, function(i) {
                                  tags$li(textOutput(summaryIDs[i]))
                              }),
-                         h4("Data"), 
-                         lapply(7, function(i) {
-                           tags$li(textOutput(summaryIDs[i]))
-                         }),
-                         tags$ul(
-                           tags$li(textOutput(summaryIDs[8])), # new subitems
-                           tags$li(textOutput(summaryIDs[9]))
-                         ),                       
-                           lapply(10:15, function(i) {
+                             h4("Data"),
+                             lapply(7, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             tags$ul(
+                                 tags$li(textOutput(summaryIDs[8])), # new subitems
+                                 tags$li(textOutput(summaryIDs[9]))
+                             ),
+                         ), 
+                         tags$ol(start=8, 
+                             lapply(10:15, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Ground truth"),
+                             lapply(16:20, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Data partitions"),
+                             lapply(21:23, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Model"),
+                             lapply(24:26, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Trainig"),
+                             lapply(27:29, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("Evaluation"),
+                             lapply(30:34, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("RESULTS (items 33-37)"),
+                             h4("Data"),
+                             lapply(35:37, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             tags$ul(
+                                 tags$li(textOutput(summaryIDs[38])) # new subitem
+                             ),
+                         ), 
+                         tags$ol(start=36,  
+                             h4("Performance"),
+                             lapply(39:40, function(i) {
+                                 tags$li(textOutput(summaryIDs[i]))
+                             }),
+                             h4("DISCUSSION (items 38 and 39)"), 
+                             
+                           lapply(41, function(i) {
                              tags$li(textOutput(summaryIDs[i]))
                            }),
-                         h4("Ground truth"),
-                           lapply(16:20, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                         h4("Data partitions"),
-                           lapply(21:23, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                         h4("Model"),
-                           lapply(24:26, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                         h4("Trainig"),
-                           lapply(27:29, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                           h4("Evaluation"),
-                           lapply(30:34, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                           h4("RESULTS (items 33-37)"),
-                           h4("Data"),
-                           lapply(35:37, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                         tags$ul(
-                           tags$li(textOutput(summaryIDs[38])) # new subitem
+                           tags$ul(
+                             tags$li(textOutput(summaryIDs[42])) # new subitem
+                           ),
                          ),
-                           h4("Performance"),
-                           lapply(39:40, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
-                           }),
-                           h4("DISCUSSION (items 38 and 39)"), 
-                         lapply(41, function(i) {
-                           tags$li(textOutput(summaryIDs[i]))
-                         }),
-                         tags$ul(
-                           tags$li(textOutput(summaryIDs[42])) # new subitem
-                         ),
+                         tags$ol(start=39, 
                            lapply(43, function(i) {
-                             tags$li(textOutput(summaryIDs[i]))
+                                tags$li(textOutput(summaryIDs[i]))
                            }), 
                            h4("OTHER (items 40-42)"), 
-                         lapply(44, function(i) {
-                           tags$li(textOutput(summaryIDs[i]))
-                         }),
-                         tags$ul(
-                           tags$li(textOutput(summaryIDs[45])) # new subitem
-                         ),
-                           lapply(46:47, function(i) {
+                           lapply(44, function(i) {
                              tags$li(textOutput(summaryIDs[i]))
-                           }),
+                           }), 
+                           tags$ul(
+                             tags$li(textOutput(summaryIDs[45])) # new subitem
+                           ),
                          ),
+                         tags$ol(start=41, 
+                           lapply(46:47, function(i) {
+                               tags$li(textOutput(summaryIDs[i]))
+                           }),
+                         )
                  ),
                  
                  br(), br(),
@@ -557,54 +563,25 @@ server <- function(input, output, session) {
         assign(sumIDs[i],
                reactive({
                    
-                   if (input[[inputIDs[i]]] %in% c("Yes", 
+                   if (input[[inputIDs[i]]] %in% c("Yes",
+                                                   "Objectives: No; Hypotheses: Yes", 
+                                                   "Objectives: Yes; Hypotheses: No", 
+                                                   "Objectives: Yes; Hypotheses: Yes", 
+                                                   "Retrospective", 
+                                                   "Prospective", 
                                                    "Partially")) {
                        if (input[[responseIDs[i]]]=="") {
                            return(strblank)
                        } else {
                            return(input[[responseIDs[i]]])
                        } 
-                   ##
-                   } else if (input[[inputIDs[i]]] == "No") {
+                   } else if (input[[inputIDs[i]]] %in% c("No",
+                                                          "yes", 
+                                                          "no", 
+                                                          "Objectives: No; Hypotheses: No", 
+                                                          "Please Select")) {
                        return(noboilers[i])
-                   } else if (input[[inputIDs[i]]] == "yes") {
-                     return(noboilers[i])
-                   } else if (input[[inputIDs[i]]] == "no") {
-                     return(noboilers[i])
-                   } else if (input[[inputIDs[i]]] == "Objectives: No; Hypotheses: No") {
-                     return(noboilers[i])
-                   } else if (input[[inputIDs[i]]] %in% c("Objectives: No; Hypotheses: Yes", 
-                                                          "Objectives: Yes; Hypotheses: No", 
-                                                          "Objectives: Yes; Hypotheses: Yes")) {
-                     
-                     if (input[[responseIDs[i]]]=="") {
-                       return(strblank)
-                     } else {
-                       return(input[[responseIDs[i]]])
-                     } 
-                   } else if (input[[inputIDs[i]]] %in% c("Retrospective", "Prospective")) {
-                       return(strblank)
-                   } else if (input[[inputIDs[i]]] %in% c("Not applicable",
-                                                          "Not applicable, the study does not take cognitive or behavioural measures",
-                                                          "Not applicable, there was only one participant group")) {
-                       return(naboilers[i])
-                   } else if (input[[inputIDs[i]]] == "Yes, and the measure was not defined a priori") {
-                       temp <- input[[responseIDs[i]]]
-                       
-                       if (temp=="") {
-                           temp <- strblank
-                       }
-                       
-                       # Remove leading/trailing whitespace and add period if not at end
-                       temp <- trimws(temp)
-                       if (!grepl(".+\\.$", temp)) {
-                           temp <- paste0(temp, ".")
-                       }
-                       return(paste(temp, "This clinical or behavioural significance value was not defined a priori.", sep=" "))
-                   } else if (input[[inputIDs[i]]] %in% c("Yes, but a double-blind was not used",
-                                                          "Yes, and a standard-of-care intervention group was not used as a benchmark for improvement")) {
-                       return(naboilers[i])
-                   }
+                   } 
                }),
                envir=globalenv()
         )
@@ -647,11 +624,11 @@ server <- function(input, output, session) {
              # Set up parameters to pass to Rmd document
              params <- list("title"=title(), "author"=author(), "email"=email(), #, "rater"=rater()
                             "domain1"=c(sum1(), sum2(), sum3(), sum4()),
-                            "domain2"=c(sum5(), sum6(), sum7a.datasources(), sum7b.dataav(), sum7c.codeav(), sum8(), sum9(), sum10(), sum11(), sum12(), sum13(), sum14(),
+                            "domain2"=c(sum5(), sum6(), sum7a.Data_Sources(), sum7b.Data_Available(), sum7c.Code_Available(), sum8(), sum9(), sum10(), sum11(), sum12(), sum13(), sum14(),
                                         sum15(), sum16(), sum17(), sum18(), sum19(), sum20(), sum21(),sum22(), sum23(), sum24(), sum25(), sum26(), sum27(), sum28(), sum29(), sum30(), sum31(),sum32()), # METHODS
-                            "domain3"=c(sum33(), sum34(), sum35a.performance(), sum35b.benchmark(), sum36(), sum37()), # RESULTS
-                            "domain4"=c(sum38a.summary(), sum38b.limitations(), sum39()), #DISCUSSION
-                            "domain5"=c(sum40a.datareg(), sum40b.analysisreg(), sum41(), sum42()),
+                            "domain3"=c(sum33(), sum34(), sum35a.Performance(), sum35b.Benchmark(), sum36(), sum37()), # RESULTS
+                            "domain4"=c(sum38a.Summary(), sum38b.Limitations(), sum39()), #DISCUSSION
+                            "domain5"=c(sum40a.Datacollection_Registered(), sum40b.Analysis_Registered(), sum41(), sum42()),
                             "boilers"=c(noboilers, naboilers, strblank)
              )
     
