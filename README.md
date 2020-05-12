@@ -11,7 +11,7 @@ This CLAIM online tool is an R Shiny app that accompanies the development of the
 
 
 ## Usage
-he app is adapted from the code of the CRED-nf checklist (https://crednf.shinyapps.io/CREDnf/). Hence, information about ##Usage and ##Installation are quoted below from the CRED-nf checklist README and adapted where necessary.  
+This shiny app is adapted from the code of the CRED-nf checklist (https://crednf.shinyapps.io/CREDnf/). Hence, information about ##Usage and ##Installation are quoted below from the CRED-nf checklist README and adapted where necessary.  
 
 The checklist includes 42 items grouped into 5 different domains:
 
