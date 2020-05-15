@@ -183,7 +183,7 @@ noboilers <- c("AI methodology NOT identifiable.",
                "38b) Study limitations NOT described.", 
                "Implications for (clinical) practice NOT described.", 
                "a) Registration number and name of registry for study that generated raw data NOT reported.", 
-               "41b) Registration number and name of registry for reviewed Machine Learning study NOT reported.", 
+               "40b) Registration number and name of registry for reviewed Machine Learning study NOT reported.", 
                "Access to full study protocol NOT provided.", 
                "Sources of funding and other support and the role of funders NOT disclosed."
 )
