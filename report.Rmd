@@ -1,5 +1,5 @@
 ---
-title: "CLAIM summary"
+title: "CLAIM summary" # master file
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 classoption: landscape
