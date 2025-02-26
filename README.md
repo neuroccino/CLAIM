@@ -5,9 +5,9 @@ bibliography: CLAIM.bib
 # CLAIM online checklist tool
 
 
-CLAIM (Checklist for Artifical Intelligence in Medical Imaging)  [@Mongan2020] was developed to promote consistency and to standardise the design and reporting of machine learning studies in medicine. Current literature shows considerable heterogeinity in reporting standards, which makes it difficult to evaluate study quality (e.g. bias may be unclear) reproduce findings
+This online tool is an R Shiny app for CLAIM (Checklist for Artifical Intelligence in Medical Imaging) was developed by Dr. David Mehler. CLAIM aims to promote consistency and to standardise the design and reporting of machine learning studies in medicine. Current literature shows considerable heterogeinity in reporting standards, which makes it difficult to evaluate study quality (e.g. bias may be unclear) reproduce findings
 
-This CLAIM online tool is an R Shiny app that accompanies the development of the checklist. It makes it easy for users to complete the checklist via a web browser, providing prompting questions for each of the items and highlighting those where users have left responses blank. It can also be used to generate a PDF report of responses which can be included alongside a manuscript submission to journals so that reviewers can have access to the completed checklist.
+This online tool makes it easy for users to complete the checklist via a web browser, providing prompting questions for each of the items and highlighting those where users have left responses blank. It can also be used to generate a PDF report of responses which can be included alongside a manuscript submission to journals so that reviewers can have access to the completed checklist.
 
 
 ## Usage
