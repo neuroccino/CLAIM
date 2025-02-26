@@ -1,4 +1,4 @@
-library(shiny)
+library(shiny) # only required depency
 
 ncheck <- 47 # Number of checklist items CHANGE to 47
 checkIDs <- c("1", "2","3","4",
